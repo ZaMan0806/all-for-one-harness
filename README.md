@@ -10,6 +10,7 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 |---|---|---|
 | `karpathy-guidelines` | 요청 안 한 기능, 쓸데없는 추상화, 요청 범위 밖 수정을 막고 가정을 먼저 말하게 합니다. | 코드 작성·리뷰·리팩터링 때 자동 |
 | `verification-before-completion` | 테스트·빌드를 실제로 돌려 보기 전에는 "완료", "통과"라고 말하지 못하게 합니다. | 완료를 주장하기 직전 자동 |
+| `stop-slop` | "Here's the thing", "Not X. It's Y." 같은 상투적 도입·대비 구문, 군더더기 부사, 수동태, em dash처럼 AI 글에서 자주 보이는 패턴을 지웁니다. 표현 목록과 고치기 전후 예시가 `references/`에 있습니다. | 글 작성·편집·검토 때 자동 |
 
 ### 청소: 이미 쌓인 slop을 찾아서 치우기
 
@@ -100,6 +101,15 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 
 - 스킬끼리 부르는 이름의 접두사 `/115dkk-skills:`를 `/zaman0806-skills:`로 바꿨습니다(`resolve-audit`의 SKILL.md와 `references/classification-guide.md`). 그 외 내용은 그대로입니다.
 - 115dkk 플러그인 아이콘(`assets/`)과 Codex용 매니페스트는 가져오지 않았습니다.
+
+### stop-slop
+
+[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (MIT, Hardik Pandya), 커밋 [`8da1f03`](https://github.com/hardikpandya/stop-slop/tree/8da1f030185bdfe8471220585162991eaeb970e9) (2026-03-17).
+
+바꾼 점:
+
+- `SKILL.md`와 `references/`만 가져왔습니다. 설치 안내와 이미지가 든 `README.md`, `CHANGELOG.md`, `LICENSE`는 가져오지 않았고, 저작권 줄은 이 저장소의 `LICENSE`로 옮겼습니다.
+- 내용은 원본 그대로입니다. 규칙이 영어 글 기준(-ly 부사, em dash, Wh- 시작 문장)이라 한국어 글에는 일부만 들어맞습니다.
 
 ### attention-span
 

@@ -46,7 +46,7 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 ## 열린 질문
 
 - **TS/JS를 쓰는지:** 쓴다면 `cloudflare/oxlint-config` 또는 `anti-slop` 추가를 검토합니다.
-- **글쓰기(문장) slop 스킬:** 지금은 코드 쪽과 답변 길이(attention-span)만 있습니다. "결론적으로~", 과한 불릿 같은 문장 slop을 다루는 스킬 후보를 아직 찾지 않았습니다.
+- **글쓰기(문장) slop 스킬:** `stop-slop`을 넣었습니다(2026-11-25). 규칙이 영어 글 기준이라 한국어 글에 맞게 고칠지, 발동 범위(모든 답변인지 문서만인지)를 좁힐지는 써 보고 정합니다.
 - **아이콘:** validate가 `ICON_MISSING`을 경고합니다. 넣으려면 `.claude-plugin/icon.png`(정사각형, 512~2048px).
 
 ## 검토했지만 넣지 않은 후보
@@ -58,3 +58,4 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 | dmmulroy/anti-slop | 보류 (TS/JS 전용) |
 | obra/superpowers `verification-before-completion` | 넣음 (수정) |
 | 115dkk/agent-skills 4개 | 넣음 (접두사만 변경) |
+| hardikpandya/stop-slop | 넣음 (README·CHANGELOG 제외, 내용 그대로) |
