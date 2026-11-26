@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>all-for-one-harness 개요</title>
+<style>
+  :root { --bg: #fdfcf8; --fg: #1a1a1a; --muted: #5a5a5a; --rule: #c8c4b8; --shade: #f1eee4; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1b1a18; --fg: #e8e6df; --muted: #a8a59c; --rule: #4a4843; --shade: #26251f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font-family: Georgia, "Times New Roman", "Nanum Myeongjo", "AppleMyungjo", serif;
+         font-size: 17px; line-height: 1.75; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 80px; }
+  h1 { font-size: 30px; font-weight: normal; margin: 0 0 4px; letter-spacing: .01em; }
+  .sub { color: var(--muted); font-style: italic; margin: 0 0 28px; }
+  h2 { font-size: 21px; font-weight: normal; border-bottom: 1px solid var(--rule);
+       padding-bottom: 6px; margin: 48px 0 16px; }
+  h2 span { color: var(--muted); margin-right: 8px; }
+  p { margin: 0 0 14px; }
+  code { font-family: Menlo, Consolas, monospace; font-size: 14px; background: var(--shade); padding: 1px 4px; }
+  figure { margin: 24px 0 28px; }
+  figure svg { width: 100%; height: auto; display: block; color: var(--fg); }
+  figcaption { font-size: 14px; color: var(--muted); text-align: center; font-style: italic; margin-top: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0 20px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+  th { font-weight: normal; font-style: italic; color: var(--muted); border-bottom: 1px solid var(--fg); }
+  pre { font-family: Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.6;
+        background: var(--shade); padding: 16px; overflow-x: auto; margin: 8px 0 20px; }
+  ol, ul { padding-left: 22px; margin: 0 0 14px; }
+  .note { border-left: 2px solid var(--fg); padding: 2px 0 2px 14px; color: var(--muted); }
+  footer { margin-top: 56px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; }
+  svg .box { fill: var(--bg); stroke: currentColor; stroke-width: 1; }
+  svg .frame { fill: none; stroke: currentColor; stroke-width: .8; stroke-dasharray: 5 4; }
+  svg .line { fill: none; stroke: currentColor; stroke-width: 1; }
+  svg text { fill: currentColor; font-family: inherit; }
+  svg .t { font-size: 15px; }
+  svg .s { font-size: 12.5px; fill: var(--muted); font-style: italic; }
+  svg .h { font-size: 14px; letter-spacing: .04em; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>all-for-one-harness</h1>
+<p class="sub">AI가 만든 코드와 글의 군더더기(AI-slop)를 줄이는 스킬 모음</p>
+
+<p>이 저장소는 Claude Code 플러그인 마켓플레이스입니다. 저장소를 한 번 등록하면 안에 든 스킬을 Claude Code, 데스크톱 앱, claude.ai에서 같이 쓸 수 있습니다. 이 문서는 하네스가 무엇으로 이루어지는지, 그리고 이 저장소의 스킬이 언제 어떤 순서로 쓰이는지를 그림으로 설명합니다.</p>
+
+<h2><span>I.</span>하네스란</h2>
+
+<p>하네스는 모델(Claude) 바깥에서 모델이 일하는 방식을 정하는 것들을 통틀어 부르는 말입니다. 크게 두 갈래입니다. 왼쪽은 모델이 읽고 따르려 하는 <em>글</em>이라 어길 수도 있습니다. 오른쪽은 프로그램이 직접 지키게 하는 <em>설정</em>이라 모델의 판단과 상관없이 작동합니다.</p>
+
+<figure>
+<svg viewBox="0 0 720 390" role="img" aria-labelledby="f1t">
+  <title id="f1t">하네스 구성 요소: 모델이 읽는 글, 프로그램이 강제하는 설정, 그리고 이를 묶는 플러그인과 마켓플레이스</title>
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.2"/></marker></defs>
+
+  <rect class="frame" x="10" y="10" width="340" height="240"/>
+  <text class="h" x="30" y="40">모델이 읽는 글 — 부탁</text>
+  <rect class="box" x="40" y="66" width="280" height="64"/>
+  <text class="t" x="180" y="94" text-anchor="middle">Rule (CLAUDE.md 등)</text>
+  <text class="s" x="180" y="116" text-anchor="middle">세션을 시작할 때 항상 읽음</text>
+  <rect class="box" x="40" y="160" width="280" height="64"/>
+  <text class="t" x="180" y="188" text-anchor="middle">Skill (SKILL.md)</text>
+  <text class="s" x="180" y="210" text-anchor="middle">상황이 맞을 때만 꺼내 읽음</text>
+
+  <rect class="frame" x="370" y="10" width="340" height="240"/>
+  <text class="h" x="390" y="40">프로그램이 강제 — 확실</text>
+  <rect class="box" x="400" y="66" width="280" height="64"/>
+  <text class="t" x="540" y="94" text-anchor="middle">settings.json</text>
+  <text class="s" x="540" y="116" text-anchor="middle">권한, 커밋 서명 끄기</text>
+  <rect class="box" x="400" y="160" width="280" height="64"/>
+  <text class="t" x="540" y="188" text-anchor="middle">Hook</text>
+  <text class="s" x="540" y="210" text-anchor="middle">정해진 순간에 스크립트 실행</text>
+
+  <rect class="box" x="40" y="296" width="280" height="64"/>
+  <text class="t" x="180" y="324" text-anchor="middle">Marketplace</text>
+  <text class="s" x="180" y="346" text-anchor="middle">플러그인 목록 — 이 저장소</text>
+  <line class="line" x1="320" y1="328" x2="396" y2="328" marker-end="url(#ah)"/>
+  <rect class="box" x="400" y="296" width="280" height="64"/>
+  <text class="t" x="540" y="324" text-anchor="middle">Plugin</text>
+  <text class="s" x="540" y="346" text-anchor="middle">스킬·훅 등을 묶은 꾸러미</text>
+</svg>
+<figcaption>그림 1. 하네스를 이루는 것들</figcaption>
+</figure>
+
+<table>
+  <tr><th style="width:24%">이름</th><th>하는 일</th><th style="width:30%">이 저장소에서는</th></tr>
+  <tr><td>Rule</td><td>세션마다 항상 컨텍스트에 들어가는 기본 지침. <code>CLAUDE.md</code>, <code>AGENTS.md</code>, <code>.claude/rules/</code>에 씁니다. 아래에서 자세히 설명합니다.</td><td>커밋 규칙, 스킬 가져오는 절차</td></tr>
+  <tr><td>Skill</td><td>폴더 하나에 <code>SKILL.md</code>와 참고 문서. 평소에는 <code>description</code>만 보이고, 상황이 맞으면 본문을 읽습니다.</td><td><code>skills/</code> 아래 7개</td></tr>
+  <tr><td>settings.json</td><td>권한이나 커밋 서명처럼 프로그램이 직접 지키게 하는 설정.</td><td>AI 서명 끄기 (<code>attribution</code>)</td></tr>
+  <tr><td>Hook</td><td>도구를 쓰기 전후 같은 정해진 순간에 스크립트를 자동으로 실행합니다.</td><td>아직 없음</td></tr>
+  <tr><td>Plugin</td><td>스킬, 훅, 명령을 묶어 한 번에 설치하는 단위.</td><td><code>zaman0806-skills</code>, <code>attention-span</code></td></tr>
+  <tr><td>Marketplace</td><td>플러그인 목록. 저장소를 등록하면 안의 플러그인을 골라 설치합니다.</td><td>이 저장소 전체</td></tr>
+  <tr><td>MCP</td><td>GitHub, Figma 같은 외부 서비스를 도구로 연결하는 방식. 규칙이 아니라 손발에 해당합니다.</td><td>쓰지 않음</td></tr>
+</table>
+
+<p class="note">반드시 지켜져야 하는 일은 글로 부탁하기보다 설정이나 훅으로 강제하는 편이 확실합니다. 스킬은 <code>description</code>이 애매하면 발동하지 않거나 엉뚱한 때 발동합니다.</p>
+
+<h3 style="font-weight:normal;font-size:18px;margin:36px 0 12px">규칙(Rule)</h3>
+
+<p>규칙은 "이 프로젝트에서는 늘 이렇게 한다"를 적은 글입니다. 사람이 새로 온 동료에게 주는 작업 안내서와 같습니다. 어디에 두느냐에 따라 적용 범위가 달라지고, 범위가 겹치면 모두 함께 읽힙니다. 좁은 범위의 규칙이 더 구체적이므로, 서로 다르면 좁은 쪽을 따르게 됩니다.</p>
+
+<figure>
+<svg viewBox="0 0 720 330" role="img" aria-labelledby="f3t">
+  <title id="f3t">규칙의 범위: 사용자 전체 안에 프로젝트, 프로젝트 안에 특정 경로</title>
+  <rect class="frame" x="10" y="10" width="700" height="310"/>
+  <text class="h" x="30" y="40">사용자 전체 — 모든 프로젝트</text>
+  <text class="s" x="30" y="62">~/.claude/CLAUDE.md · 예: "커밋에 Claude를 공동 작성자로 넣지 말 것"</text>
+  <rect class="frame" x="40" y="86" width="640" height="214"/>
+  <text class="h" x="60" y="116">프로젝트 — 이 저장소</text>
+  <text class="s" x="60" y="138">.claude/CLAUDE.md · AGENTS.md · 예: "플러그인 버전을 직접 고치지 말 것"</text>
+  <rect class="box" x="70" y="166" width="580" height="104"/>
+  <text class="h" x="90" y="196">특정 경로 — 그 파일을 다룰 때만</text>
+  <text class="s" x="90" y="218">.claude/rules/*.md 에 paths 를 지정</text>
+  <text class="s" x="90" y="240">예: skills/** 를 고칠 때 "SKILL.md의 name은 폴더 이름과 같게"</text>
+</svg>
+<figcaption>그림 2. 규칙이 놓이는 자리와 범위</figcaption>
+</figure>
+
+<table>
+  <tr><th style="width:30%">파일</th><th>쓰임</th></tr>
+  <tr><td><code>~/.claude/CLAUDE.md</code></td><td>내 모든 프로젝트에 적용. 개인 취향과 고정 요청.</td></tr>
+  <tr><td><code>CLAUDE.md</code>, <code>.claude/CLAUDE.md</code></td><td>이 프로젝트에만 적용. 저장소에 커밋해서 함께 쓰는 사람과 공유합니다.</td></tr>
+  <tr><td><code>AGENTS.md</code></td><td>Claude 말고 Codex, Cursor 같은 다른 AI 도구도 읽는 공용 규칙 파일. 이 저장소는 규칙을 여기에 쓰고 <code>CLAUDE.md</code>에서 <code>@../AGENTS.md</code>로 불러옵니다.</td></tr>
+  <tr><td><code>.claude/rules/*.md</code></td><td>규칙을 주제별 파일로 나눌 때 씁니다. 앞머리에 <code>paths</code>를 적으면 그 경로의 파일을 다룰 때만 읽힙니다. 이 저장소는 아직 쓰지 않습니다.</td></tr>
+</table>
+
+<p>규칙과 스킬은 둘 다 모델이 읽는 글이지만 쓰임이 다릅니다.</p>
+
+<table>
+  <tr><th style="width:22%"></th><th>규칙(Rule)</th><th>스킬(Skill)</th></tr>
+  <tr><td>언제 읽히나</td><td>세션을 시작할 때 항상</td><td>상황이 <code>description</code>과 맞을 때만</td></tr>
+  <tr><td>비용</td><td>늘 컨텍스트를 차지하므로 짧아야 함</td><td>평소에는 한 줄이라 길어도 됨</td></tr>
+  <tr><td>담는 것</td><td>"늘 이렇게 한다", "절대 이건 하지 않는다"</td><td>"이 일을 할 때는 이 순서로 한다"</td></tr>
+  <tr><td>예</td><td>커밋에 AI 서명 금지, 버전 직접 수정 금지</td><td>기술 부채 감사, 테스트 먼저 쓰기</td></tr>
+  <tr><td>다른 프로젝트에서</td><td>그 저장소에만 있음</td><td>플러그인으로 설치하면 어디서나</td></tr>
+</table>
+
+<p class="note">"규칙"이라는 말은 <code>settings.json</code>의 권한 규칙(<code>permissions</code>의 allow, deny)을 가리킬 때도 씁니다. 이것은 글이 아니라 설정이라, 모델이 어떤 명령을 실행할 수 있는지를 프로그램이 직접 막거나 허락합니다.</p>
+
+<h2><span>II.</span>스킬의 흐름</h2>
+
+<p>스킬은 두 무리로 나뉩니다. <em>예방</em> 스킬은 작업하는 동안 Claude가 스스로 꺼내 쓰고(<code>ponytail-review</code>만 직접 부름), <em>청소</em> 스킬은 사람이 주기적으로 불러서 이미 쌓인 군더더기를 찾아 치웁니다.</p>
+
+<figure>
+<svg viewBox="0 0 720 680" role="img" aria-labelledby="f2t">
+  <title id="f2t">예방 스킬 세 개는 작업 중에 자동으로 발동하고, 청소 스킬은 감사, GitHub 이슈, resolve-audit, tdd, PR 순서로 흐른다</title>
+  <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.2"/></marker></defs>
+
+  <rect class="frame" x="10" y="10" width="700" height="250"/>
+  <text class="h" x="30" y="40">예방 — 새로 만드는 동안</text>
+  <rect class="box" x="30" y="76" width="210" height="64"/>
+  <text class="t" x="135" y="104" text-anchor="middle">karpathy-guidelines</text>
+  <text class="s" x="135" y="126" text-anchor="middle">코드를 짤 때</text>
+  <rect class="box" x="255" y="76" width="190" height="64"/>
+  <text class="t" x="350" y="104" text-anchor="middle">stop-slop</text>
+  <text class="s" x="350" y="126" text-anchor="middle">글을 쓸 때</text>
+  <rect class="box" x="460" y="76" width="230" height="64"/>
+  <text class="t" x="575" y="104" text-anchor="middle">verification-before-…</text>
+  <text class="s" x="575" y="126" text-anchor="middle">"완료"라고 말하기 직전</text>
+
+    <rect class="box" x="460" y="166" width="230" height="64"/>
+  <text class="t" x="575" y="194" text-anchor="middle">ponytail-review</text>
+  <text class="s" x="575" y="216" text-anchor="middle">커밋·PR 전에 직접 불러서</text>
+  <text class="s" x="30" y="203">자동: 상황이 맞으면 Claude가 꺼내 씀</text>
+  <text class="s" x="30" y="223">직접: 사용자가 이름을 불러야 작동</text>
+
+<rect class="frame" x="10" y="290" width="700" height="270"/>
+  <text class="h" x="30" y="320">청소 — 주기적으로, 직접 불러서</text>
+  <rect class="box" x="30" y="346" width="190" height="64"/>
+  <text class="t" x="125" y="374" text-anchor="middle">improve-codebase-…</text>
+  <text class="s" x="125" y="396" text-anchor="middle">구조 개선 후보</text>
+  <rect class="box" x="30" y="440" width="190" height="64"/>
+  <text class="t" x="125" y="468" text-anchor="middle">tech-debt-audit</text>
+  <text class="s" x="125" y="490" text-anchor="middle">아홉 관점의 감사</text>
+  <path class="line" d="M220 378 H240 V416 H258" marker-end="url(#ah2)"/>
+  <path class="line" d="M220 472 H240 V436 H258" marker-end="url(#ah2)"/>
+  <rect class="box" x="262" y="394" width="120" height="64"/>
+  <text class="t" x="322" y="422" text-anchor="middle">GitHub 이슈</text>
+  <text class="s" x="322" y="444" text-anchor="middle">발견 목록</text>
+  <line class="line" x1="382" y1="426" x2="408" y2="426" marker-end="url(#ah2)"/>
+  <rect class="box" x="412" y="394" width="150" height="64"/>
+  <text class="t" x="487" y="422" text-anchor="middle">resolve-audit</text>
+  <text class="s" x="487" y="444" text-anchor="middle">하나씩 고침</text>
+  <line class="line" x1="562" y1="426" x2="608" y2="426" marker-end="url(#ah2)"/>
+  <rect class="box" x="612" y="402" width="78" height="48"/>
+  <text class="t" x="651" y="431" text-anchor="middle">PR</text>
+  <line class="line" x1="487" y1="458" x2="487" y2="488" marker-end="url(#ah2)"/>
+  <rect class="box" x="412" y="492" width="150" height="48"/>
+  <text class="t" x="487" y="521" text-anchor="middle">tdd</text>
+  <text class="s" x="582" y="521">동작이 바뀔 때만</text>
+
+  <rect class="frame" x="10" y="590" width="700" height="80"/>
+  <text class="h" x="30" y="620">말투 — 따로 설치, 직접 부를 때만</text>
+  <text class="t" x="30" y="650">attention-span</text>
+  <text class="s" x="160" y="650">답변을 짧고 훑어보기 좋게. /attention-span:spartan 등</text>
+</svg>
+<figcaption>그림 3. 예방은 작업 중에, 청소는 주기적으로</figcaption>
+</figure>
+
+<table>
+  <tr><th style="width:30%">스킬</th><th style="width:12%">무리</th><th>하는 일</th></tr>
+  <tr><td><code>karpathy-guidelines</code></td><td>예방</td><td>요청하지 않은 기능, 쓸데없는 추상화, 범위 밖 수정을 막고 가정을 먼저 말하게 합니다.</td></tr>
+  <tr><td><code>stop-slop</code></td><td>예방</td><td>상투적인 도입부, "X가 아니라 Y" 식의 대비, 군더더기 부사 같은 AI 글 패턴을 지웁니다.</td></tr>
+  <tr><td><code>verification-before-completion</code></td><td>예방</td><td>테스트나 빌드를 실제로 돌려 보기 전에는 "완료", "통과"라고 말하지 못하게 합니다.</td></tr>
+  <tr><td><code>ponytail-review</code></td><td>예방</td><td>커밋이나 PR 전에 직접 불러서, 방금 바꾼 것을 정확성부터 군더더기까지 순서대로 리뷰합니다. 코드는 고치지 않습니다.</td></tr>
+  <tr><td><code>improve-codebase-architecture</code></td><td>청소</td><td>중복 구현과 얕은 모듈을 찾아, 더 작은 인터페이스 뒤로 묶을 후보를 보고합니다.</td></tr>
+  <tr><td><code>tech-debt-audit</code></td><td>청소</td><td>저장소 전체를 아홉 관점으로 감사하고, 발견마다 <code>파일:줄</code>과 심각도를 붙입니다.</td></tr>
+  <tr><td><code>resolve-audit</code></td><td>청소</td><td>감사 결과 이슈를 받아 발견 하나에 커밋 하나씩 고치고 PR을 엽니다.</td></tr>
+  <tr><td><code>tdd</code></td><td>청소</td><td>동작이 바뀌는 수정이면 실패하는 테스트부터 쓰게 합니다.</td></tr>
+</table>
+
+<h2><span>III.</span>저장소 구조</h2>
+
+<pre>all-for-one-harness/
+├── .claude-plugin/
+│   ├── marketplace.json   플러그인 목록 (zaman0806-skills, attention-span)
+│   └── plugin.json        버전은 워크플로가 관리 — 직접 고치지 않음
+├── .claude/
+│   ├── CLAUDE.md          Claude Code용 지침 (AGENTS.md를 불러옴)
+│   └── settings.json      커밋 서명 끄기
+├── .github/workflows/
+│   └── plugin-version.yml push마다 버전을 1.0.N으로 올림
+├── skills/
+│   └── &lt;스킬이름&gt;/
+│       ├── SKILL.md       name은 폴더 이름과 같아야 함
+│       └── …              참고 문서, 예시
+├── docs/
+│   ├── HANDOFF.md         결정 기록과 다음 할 일
+│   └── overview.html      이 문서
+├── AGENTS.md              작업 규칙
+├── README.md              스킬 표와 출처
+└── LICENSE                원작자 저작권 줄 포함</pre>
+
+<h2><span>IV.</span>스킬을 더할 때</h2>
+
+<ol>
+  <li>후보 저장소를 이 저장소 밖 임시 폴더에 받고, 스크립트는 실행하지 않은 채 읽습니다.</li>
+  <li>라이선스를 확인합니다. MIT·Apache는 복사하고, AGPL·GPL은 가리키기만 하며, 라이선스가 없으면 넣지 않습니다.</li>
+  <li>기존 스킬과 <code>description</code>이 겹치는지, 지시가 반대인지 봅니다.</li>
+  <li>폴더째 <code>skills/</code>로 옮기고, 예방과 청소 중 어디에 속하는지 정합니다.</li>
+  <li>README의 표와 출처, <code>LICENSE</code>의 저작권 줄을 갱신합니다.</li>
+  <li><code>claude plugin validate .</code>로 검사한 뒤 스킬 하나에 커밋 하나로 올립니다.</li>
+</ol>
+<p>자세한 절차는 <code>AGENTS.md</code>에 있습니다.</p>
+
+<footer>2026년 11월 26일 기준. 스킬이 바뀌면 이 문서의 그림 3과 표도 함께 고칩니다.</footer>
+
+</main>
+</body>
+</html>
