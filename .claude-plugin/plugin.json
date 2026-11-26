@@ -1,6 +1,6 @@
 {
   "name": "zaman0806-skills",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Skills against AI slop. Prevention: karpathy-guidelines (no overbuilt or out-of-scope changes), verification-before-completion (no success claims without fresh evidence). Cleanup: improve-codebase-architecture (deepening reviews), tech-debt-audit (file-cited whole-repository audits), resolve-audit (an audit issue turned into one PR, one finding per commit) and tdd (red-green at agreed seams).",
   "author": {
     "name": "ZaMan0806",
