@@ -46,7 +46,7 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 ## 열린 질문
 
 - **TS/JS를 쓰는지:** 쓴다면 `cloudflare/oxlint-config` 또는 `anti-slop` 추가를 검토합니다.
-- **글쓰기(문장) slop 스킬:** `stop-slop`을 넣었습니다(2026-11-25). 규칙이 영어 글 기준이라 한국어 글에 맞게 고칠지, 발동 범위(모든 답변인지 문서만인지)를 좁힐지는 써 보고 정합니다.
+- **글쓰기(문장) slop 스킬:** `stop-slop`을 넣었다가 pstack의 `unslop`으로 바꿨습니다(2026-11-26). 규칙이 영어 글 기준이라 한국어 글에 맞게 고칠지는 써 보고 정합니다.
 - **아이콘:** validate가 `ICON_MISSING`을 경고합니다. 넣으려면 `.claude-plugin/icon.png`(정사각형, 512~2048px).
 
 ## 검토했지만 넣지 않은 후보
@@ -58,5 +58,6 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 | dmmulroy/anti-slop | 보류 (TS/JS 전용) |
 | obra/superpowers `verification-before-completion` | 넣음 (수정) |
 | 115dkk/agent-skills 4개 | 넣음 (접두사만 변경) |
-| hardikpandya/stop-slop | 넣음 (README·CHANGELOG 제외, 내용 그대로) |
+| hardikpandya/stop-slop | 넣었다가 `unslop`으로 교체 (절대 규칙이 많고 서식 slop을 안 다룸) |
+| cursor/plugins `pstack` | `unslop`만 넣음. 나머지 스킬은 기존 것이 더 깊거나 pstack 전체 체계 안에서만 작동. `correct`, `no-comments`는 추가 후보 |
 | DietrichGebert/ponytail | `ponytail-review`만 넣음 (본체는 karpathy-guidelines와, audit은 tech-debt-audit과 겹침) |

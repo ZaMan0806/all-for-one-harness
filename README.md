@@ -10,7 +10,7 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 |---|---|---|
 | `karpathy-guidelines` | 요청 안 한 기능, 쓸데없는 추상화, 요청 범위 밖 수정을 막고 가정을 먼저 말하게 합니다. | 코드 작성·리뷰·리팩터링 때 자동 |
 | `verification-before-completion` | 테스트·빌드를 실제로 돌려 보기 전에는 "완료", "통과"라고 말하지 못하게 합니다. | 완료를 주장하기 직전 자동 |
-| `stop-slop` | "Here's the thing", "Not X. It's Y." 같은 상투적 도입·대비 구문, 군더더기 부사, 수동태, em dash처럼 AI 글에서 자주 보이는 패턴을 지웁니다. 표현 목록과 고치기 전후 예시가 `references/`에 있습니다. | 글 작성·편집·검토 때 자동 |
+| `unslop` | AI 글의 흔적을 지웁니다. "delve", "leverage" 같은 AI 어휘, "not just X, but Y", 억지로 셋을 맞춘 나열, em dash, 줄 내용을 되풀이하는 굵은 라벨, 챗봇 인사말과 칭찬으로 시작하기, 뻔한 결론 등 규칙 30개 정도입니다. | 문서·README·PR·커밋 메시지를 쓸 때, 또는 "글 다듬어 줘"라고 할 때 |
 | `ponytail-review` | 방금 바꾼 것(커밋 안 한 변경, 마지막 커밋, 브랜치, PR)을 정확성 → 보안 → 부하 → 테스트 → 속도 → 군더더기 순서로 리뷰합니다. 발견마다 구체적인 실패 상황과 가장 작은 수정안을 붙이고, 코드는 고치지 않습니다. | "리뷰해 줘"라고 부를 때 |
 
 ### 청소: 이미 쌓인 slop을 찾아서 치우기
@@ -103,14 +103,17 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 - 스킬끼리 부르는 이름의 접두사 `/115dkk-skills:`를 `/zaman0806-skills:`로 바꿨습니다(`resolve-audit`의 SKILL.md와 `references/classification-guide.md`). 그 외 내용은 그대로입니다.
 - 115dkk 플러그인 아이콘(`assets/`)과 Codex용 매니페스트는 가져오지 않았습니다.
 
-### stop-slop
+### unslop
 
-[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (MIT, Hardik Pandya), 커밋 [`8da1f03`](https://github.com/hardikpandya/stop-slop/tree/8da1f030185bdfe8471220585162991eaeb970e9) (2026-03-17).
+[cursor/plugins](https://github.com/cursor/plugins)의 [`pstack`](https://github.com/cursor/plugins/tree/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/unslop) (MIT, Lauren Tan), 커밋 [`b7b93c3`](https://github.com/cursor/plugins/tree/b7b93c36be9bcc36a74db438e0fd385d660bc559) (2026-11-26). pstack에서 이 스킬만 가져왔습니다.
 
 바꾼 점:
 
-- `SKILL.md`와 `references/`만 가져왔습니다. 설치 안내와 이미지가 든 `README.md`, `CHANGELOG.md`, `LICENSE`는 가져오지 않았고, 저작권 줄은 이 저장소의 `LICENSE`로 옮겼습니다.
-- 내용은 원본 그대로입니다. 규칙이 영어 글 기준(-ly 부사, em dash, Wh- 시작 문장)이라 한국어 글에는 일부만 들어맞습니다.
+- 원본은 직접 불러야만 작동합니다(`disable-model-invocation: true`). 이 설정을 빼고, description을 "사람이 읽을 글(문서, README, PR 설명, 커밋 메시지)을 쓰거나 고칠 때, 또는 글을 다듬어 달라고 할 때"로 좁혀 자동으로 작동하게 했습니다. 코드에는 쓰지 않습니다.
+- "규칙 번호는 다른 스킬이 인용한다"는 문장을 "번호는 원본을 따르므로 빈 번호는 의도된 것"으로 바꿨습니다. 이 저장소에는 번호를 인용하는 스킬이 없습니다.
+- 규칙 내용은 원본 그대로입니다. 영어 글 기준이라 한국어 글에는 일부만 들어맞습니다.
+
+이전에 쓰던 [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)을 대신합니다. stop-slop은 "부사 전부 삭제", "수동태 금지", "항목은 셋보다 둘" 같은 절대 규칙이 많아 과하게 작동할 수 있었고, 답변·문서 서식의 slop(굵은 라벨, 이모지, 챗봇 문구)은 다루지 않았습니다.
 
 ### ponytail-review
 
