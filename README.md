@@ -22,24 +22,15 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 | `resolve-audit` | 위 두 감사 결과(GitHub 이슈)를 PR 하나로 해결합니다. 발견 하나에 커밋 하나, 커밋 메시지에 감사 ID가 들어갑니다. |
 | `tdd` | `resolve-audit`에서 동작이 바뀌는 수정이 나오면 테스트부터 쓰게 합니다(red → green). |
 
-### 말투 (선택)
-
-| 플러그인 | 하는 일 |
-|---|---|
-| `attention-span` | 답변을 짧고 훑어보기 좋게 바꾸는 스타일. `/attention-span:spartan`, `rundown`, `attention-kind`, `tldr`. 직접 불러야만 작동합니다. |
-
-`attention-span`은 AGPL-3.0이라 복사하지 않고 원본 저장소를 가리키기만 합니다(`marketplace.json`의 `git-subdir`). 원본이 업데이트되면 그대로 따라갑니다.
-
 ## 설치
 
-**claude.ai / 데스크톱 앱**: Customize → Plugins → Personal plugins의 **+** → **Add marketplace** → `ZaMan0806/all-for-one-harness` 입력 → 원하는 플러그인 설치
+**claude.ai / 데스크톱 앱**: Customize → Plugins → Personal plugins의 **+** → **Add marketplace** → `ZaMan0806/all-for-one-harness` 입력 → `zaman0806-skills` 설치
 
 **Claude Code**:
 
 ```
 /plugin marketplace add ZaMan0806/all-for-one-harness
 /plugin install zaman0806-skills@zaman0806
-/plugin install attention-span@zaman0806
 ```
 
 같은 계정으로 로그인했다면 claude.ai에서 켠 플러그인은 Claude Code에도 들어옵니다.
@@ -125,14 +116,10 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 - 출력 언어를 "아주 쉬운 영어"에서 "사용자가 쓰는 언어로, 아주 쉽게"로 바꿨습니다.
 - 그 외 내용은 원본 그대로입니다.
 
-### attention-span
-
-[alexgreensh/attention-span](https://github.com/alexgreensh/attention-span) (AGPL-3.0). 복사하지 않고 `marketplace.json`에서 `plugins/attention-span` 폴더를 가리킵니다. 확인한 시점의 커밋은 [`39c6b46`](https://github.com/alexgreensh/attention-span/tree/39c6b46b24dddecc4cef4e3ab8dc36d3fbffeb42) (2026-10-30)입니다. 고쳐 쓰고 싶어지면 복사해 오되, 그 폴더는 AGPL-3.0으로 공개하고 원본 LICENSE를 같이 둬야 합니다.
-
 ### 넣지 않은 것
 
 - [dmmulroy/anti-slop](https://github.com/dmmulroy/anti-slop): TypeScript/JavaScript용 Oxlint 규칙입니다. 원작자도 [cloudflare/oxlint-config](https://github.com/cloudflare/oxlint-config)를 먼저 권합니다. TS/JS 프로젝트에서 필요해지면 그때 추가합니다.
 
 ## 라이선스
 
-이 저장소의 파일은 MIT입니다. [LICENSE](LICENSE)에 원작자 저작권 줄을 모두 남겼습니다. `attention-span`은 이 저장소에 포함되지 않으며 원본의 AGPL-3.0을 따릅니다.
+이 저장소의 파일은 MIT입니다. [LICENSE](LICENSE)에 원작자 저작권 줄을 모두 남겼습니다.

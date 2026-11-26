@@ -4,10 +4,7 @@
 
 ## 구조
 
-`.claude-plugin/marketplace.json`에 플러그인 두 개가 있습니다.
-
-- `zaman0806-skills`: 이 저장소 자체(`source: "./"`). 스킬은 `skills/<스킬이름>/SKILL.md`에 있고, SKILL.md의 `name`은 폴더 이름과 같아야 합니다.
-- `attention-span`: 원본 저장소를 `git-subdir`로 가리키기만 합니다. AGPL-3.0이라 이 저장소에 복사하지 않습니다.
+`.claude-plugin/marketplace.json`에 플러그인 `zaman0806-skills` 하나가 있고, 이 저장소 자체를 가리킵니다(`source: "./"`). 스킬은 `skills/<스킬이름>/SKILL.md`에 있고, SKILL.md의 `name`은 폴더 이름과 같아야 합니다.
 
 스킬은 두 그룹으로 나눕니다.
 

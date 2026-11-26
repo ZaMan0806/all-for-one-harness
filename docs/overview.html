@@ -93,7 +93,7 @@
   <tr><td>Skill</td><td>폴더 하나에 <code>SKILL.md</code>와 참고 문서. 평소에는 <code>description</code>만 보이고, 상황이 맞으면 본문을 읽습니다.</td><td><code>skills/</code> 아래 7개</td></tr>
   <tr><td>settings.json</td><td>권한이나 커밋 서명처럼 프로그램이 직접 지키게 하는 설정.</td><td>AI 서명 끄기 (<code>attribution</code>)</td></tr>
   <tr><td>Hook</td><td>도구를 쓰기 전후 같은 정해진 순간에 스크립트를 자동으로 실행합니다.</td><td>아직 없음</td></tr>
-  <tr><td>Plugin</td><td>스킬, 훅, 명령을 묶어 한 번에 설치하는 단위.</td><td><code>zaman0806-skills</code>, <code>attention-span</code></td></tr>
+  <tr><td>Plugin</td><td>스킬, 훅, 명령을 묶어 한 번에 설치하는 단위.</td><td><code>zaman0806-skills</code></td></tr>
   <tr><td>Marketplace</td><td>플러그인 목록. 저장소를 등록하면 안의 플러그인을 골라 설치합니다.</td><td>이 저장소 전체</td></tr>
   <tr><td>MCP</td><td>GitHub, Figma 같은 외부 서비스를 도구로 연결하는 방식. 규칙이 아니라 손발에 해당합니다.</td><td>쓰지 않음</td></tr>
 </table>
@@ -147,7 +147,7 @@
 <p>스킬은 두 무리로 나뉩니다. <em>예방</em> 스킬은 작업하는 동안 Claude가 스스로 꺼내 쓰고(<code>ponytail-review</code>만 직접 부름), <em>청소</em> 스킬은 사람이 주기적으로 불러서 이미 쌓인 군더더기를 찾아 치웁니다.</p>
 
 <figure>
-<svg viewBox="0 0 720 680" role="img" aria-labelledby="f2t">
+<svg viewBox="0 0 720 580" role="img" aria-labelledby="f2t">
   <title id="f2t">예방 스킬 세 개는 작업 중에 자동으로 발동하고, 청소 스킬은 감사, GitHub 이슈, resolve-audit, tdd, PR 순서로 흐른다</title>
   <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="currentColor" stroke-width="1.2"/></marker></defs>
 
@@ -194,10 +194,6 @@
   <text class="t" x="487" y="521" text-anchor="middle">tdd</text>
   <text class="s" x="582" y="521">동작이 바뀔 때만</text>
 
-  <rect class="frame" x="10" y="590" width="700" height="80"/>
-  <text class="h" x="30" y="620">말투 — 따로 설치, 직접 부를 때만</text>
-  <text class="t" x="30" y="650">attention-span</text>
-  <text class="s" x="160" y="650">답변을 짧고 훑어보기 좋게. /attention-span:spartan 등</text>
 </svg>
 <figcaption>그림 3. 예방은 작업 중에, 청소는 주기적으로</figcaption>
 </figure>
@@ -218,7 +214,7 @@
 
 <pre>all-for-one-harness/
 ├── .claude-plugin/
-│   ├── marketplace.json   플러그인 목록 (zaman0806-skills, attention-span)
+│   ├── marketplace.json   플러그인 목록 (zaman0806-skills)
 │   └── plugin.json        버전은 워크플로가 관리 — 직접 고치지 않음
 ├── .claude/
 │   ├── CLAUDE.md          Claude Code용 지침 (AGENTS.md를 불러옴)

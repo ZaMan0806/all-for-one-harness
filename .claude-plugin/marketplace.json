@@ -11,19 +11,18 @@
       "source": "./",
       "description": "Prevention (karpathy-guidelines, verification-before-completion, unslop, ponytail-review) and cleanup (improve-codebase-architecture, tech-debt-audit, resolve-audit, tdd) skills against AI slop.",
       "category": "engineering",
-      "keywords": ["engineering", "skills", "ai-slop", "refactoring", "tech-debt", "audit", "tdd", "verification", "writing", "code-review"]
-    },
-    {
-      "name": "attention-span",
-      "source": {
-        "source": "git-subdir",
-        "url": "alexgreensh/attention-span",
-        "path": "plugins/attention-span"
-      },
-      "description": "Concise answer styles (/attention-span:spartan, rundown, attention-kind, tldr). Linked from upstream unmodified, AGPL-3.0.",
-      "homepage": "https://github.com/alexgreensh/attention-span",
-      "license": "AGPL-3.0",
-      "category": "productivity"
+      "keywords": [
+        "engineering",
+        "skills",
+        "ai-slop",
+        "refactoring",
+        "tech-debt",
+        "audit",
+        "tdd",
+        "verification",
+        "writing",
+        "code-review"
+      ]
     }
   ]
 }

@@ -19,7 +19,6 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 | `karpathy-guidelines` 3번 원칙에 예외 문단 추가 | "고장 안 난 건 고치지 마라"가 청소 스킬과 반대로 작동하지 않게 |
 | `verification-before-completion`의 범위를 좁히고 표현을 낮춤 | 원본은 모든 만족 표현에 적용되고 표현이 매우 강해서, 일반 대화에서도 과하게 발동할 수 있음 |
 | superpowers는 위 스킬 하나만 가져옴 | 전체 플러그인은 스킬 15개 + 세션 시작 훅이라 과함 |
-| `attention-span`은 복사하지 않고 `git-subdir`로 가리킴 | AGPL-3.0. 수정 없이 쓸 거라 가리키기만 하는 게 간단함 |
 | `dmmulroy/anti-slop`은 넣지 않음 | TS/JS용 Oxlint 규칙이고, 원작자도 `cloudflare/oxlint-config`를 먼저 권함. 사용자의 TS/JS 사용 여부를 아직 못 들음 |
 | plugin.json `version`은 워크플로가 관리 | 고정 버전이면 업데이트가 설치자에게 전달되지 않음 (115dkk가 겪은 문제) |
 | 커밋에 AI 흔적 금지 | 사용자의 고정 요청. `AGENTS.md` 규칙 + `.claude/settings.json`의 `attribution` 설정 |
@@ -31,14 +30,13 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 - 로컬 저장소: `~/Documents/Projects/ETC/all-for-one-harness`, 브랜치 `main`
 - GitHub: [ZaMan0806/all-for-one-harness](https://github.com/ZaMan0806/all-for-one-harness) (공개), `origin/main`과 같음. 첫 push는 커밋 하나(`chore: initial setup ...`)로 합쳐서 올렸습니다.
 - 버전 워크플로가 첫 push에서 성공해 `plugin.json`이 `1.0.1`이 되었습니다.
-- `claude plugin validate .` 통과 (아이콘 없음 경고 하나만 있음). 클라우드 환경에서 `zaman0806-skills`와 `attention-span` 둘 다 설치까지 확인했습니다.
+- `claude plugin validate .` 통과 (아이콘 없음 경고 하나만 있음). 클라우드 환경에서 `zaman0806-skills` 설치까지 확인했습니다.
 
 ## 다음 할 일
 
 - [x] **GitHub에 올리기.** 2026-11-24 push 완료.
 - [x] **버전 워크플로 확인.** 첫 push에서 성공, `chore(version): 1.0.1` 커밋 생성.
 - [ ] **claude.ai에 등록.** Customize → Plugins → Personal plugins의 + → Add marketplace → `ZaMan0806/all-for-one-harness` (사용자가 직접)
-- [ ] **attention-span 설치 확인.** claude.ai 개인 마켓플레이스가 `git-subdir` 소스를 지원하는지는 확인하지 못했습니다. 안 되면 `alexgreensh/attention-span`을 마켓플레이스로 따로 추가하도록 README를 고칩니다.
 - [ ] **청소 흐름 시험.** 실제 프로젝트 하나에서 `improve-codebase-architecture` → `tech-debt-audit` → 결과를 GitHub 이슈로 → `resolve-audit` 순서로 돌려 보고, 불편한 점을 스킬에 반영.
 
 - [ ] **리뷰 지적 반영.** (1) 가져온 스킬을 이 저장소에서 고칠 때 출처 갱신·`LICENSE` 원작자 줄 유지 규칙이 `AGENTS.md`에서 빠짐. (2) `tdd`가 청소 그룹인데 karpathy 예외 문단에 없음: 예방으로 옮길지 예외에 넣을지 결정. (3) `.claude/CLAUDE.md`가 `AGENTS.md` 규칙 두 줄을 중복.
@@ -53,7 +51,6 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 
 | 후보 | 결과 |
 |---|---|
-| alexgreensh/attention-span | 가리키기만 함 (AGPL) |
 | multica-ai/andrej-karpathy-skills | 넣음 (수정) |
 | dmmulroy/anti-slop | 보류 (TS/JS 전용) |
 | obra/superpowers `verification-before-completion` | 넣음 (수정) |
