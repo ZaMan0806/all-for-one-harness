@@ -11,7 +11,7 @@
 
 스킬은 두 그룹으로 나눕니다.
 
-- **예방**: 새로 만들 때 slop이 안 생기게 하는 스킬 (`karpathy-guidelines`, `verification-before-completion`, `stop-slop`)
+- **예방**: 새로 만들 때 slop이 안 생기게 하는 스킬 (`karpathy-guidelines`, `verification-before-completion`, `stop-slop`, `ponytail-review`)
 - **청소**: 이미 쌓인 slop을 찾아서 치우는 스킬 (`improve-codebase-architecture`, `tech-debt-audit`, `resolve-audit`, `tdd`)
 
 새 스킬도 둘 중 어디에 속하는지 정하고 README 표의 같은 그룹에 넣습니다.

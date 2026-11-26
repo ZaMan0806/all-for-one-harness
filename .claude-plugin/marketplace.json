@@ -9,9 +9,9 @@
     {
       "name": "zaman0806-skills",
       "source": "./",
-      "description": "Prevention (karpathy-guidelines, verification-before-completion, stop-slop) and cleanup (improve-codebase-architecture, tech-debt-audit, resolve-audit, tdd) skills against AI slop.",
+      "description": "Prevention (karpathy-guidelines, verification-before-completion, stop-slop, ponytail-review) and cleanup (improve-codebase-architecture, tech-debt-audit, resolve-audit, tdd) skills against AI slop.",
       "category": "engineering",
-      "keywords": ["engineering", "skills", "ai-slop", "refactoring", "tech-debt", "audit", "tdd", "verification", "writing"]
+      "keywords": ["engineering", "skills", "ai-slop", "refactoring", "tech-debt", "audit", "tdd", "verification", "writing", "code-review"]
     },
     {
       "name": "attention-span",

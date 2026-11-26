@@ -11,6 +11,7 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 | `karpathy-guidelines` | 요청 안 한 기능, 쓸데없는 추상화, 요청 범위 밖 수정을 막고 가정을 먼저 말하게 합니다. | 코드 작성·리뷰·리팩터링 때 자동 |
 | `verification-before-completion` | 테스트·빌드를 실제로 돌려 보기 전에는 "완료", "통과"라고 말하지 못하게 합니다. | 완료를 주장하기 직전 자동 |
 | `stop-slop` | "Here's the thing", "Not X. It's Y." 같은 상투적 도입·대비 구문, 군더더기 부사, 수동태, em dash처럼 AI 글에서 자주 보이는 패턴을 지웁니다. 표현 목록과 고치기 전후 예시가 `references/`에 있습니다. | 글 작성·편집·검토 때 자동 |
+| `ponytail-review` | 방금 바꾼 것(커밋 안 한 변경, 마지막 커밋, 브랜치, PR)을 정확성 → 보안 → 부하 → 테스트 → 속도 → 군더더기 순서로 리뷰합니다. 발견마다 구체적인 실패 상황과 가장 작은 수정안을 붙이고, 코드는 고치지 않습니다. | "리뷰해 줘"라고 부를 때 |
 
 ### 청소: 이미 쌓인 slop을 찾아서 치우기
 
@@ -45,11 +46,11 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 
 설치 후 스킬 이름은 `/zaman0806-skills:tech-debt-audit`처럼 플러그인 이름이 앞에 붙습니다.
 
-> **주의:** `115dkk/agent-skills`나 `obra/superpowers` 마켓플레이스를 이미 설치했다면 같은 스킬이 두 번 들어옵니다. 이 저장소로 옮겼다면 원본 쪽은 꺼 두세요.
+> **주의:** `115dkk/agent-skills`, `obra/superpowers`, `DietrichGebert/ponytail` 마켓플레이스를 이미 설치했다면 같은 스킬이 두 번 들어옵니다. 이 저장소로 옮겼다면 원본 쪽은 꺼 두세요.
 
 ## 쓰는 법
 
-예방 스킬은 따로 부를 필요 없이 코드 작업 중에 자동으로 켜집니다.
+예방 스킬은 따로 부를 필요 없이 코드 작업 중에 자동으로 켜집니다. `ponytail-review`만 예외로, 커밋이나 PR 전에 "이 변경 리뷰해 줘"라고 직접 부릅니다.
 
 청소는 이 순서로 돌립니다.
 
@@ -110,6 +111,16 @@ AI가 만든 코드와 답변에서 AI-Slop을 줄이기 위한 스킬 모음입
 
 - `SKILL.md`와 `references/`만 가져왔습니다. 설치 안내와 이미지가 든 `README.md`, `CHANGELOG.md`, `LICENSE`는 가져오지 않았고, 저작권 줄은 이 저장소의 `LICENSE`로 옮겼습니다.
 - 내용은 원본 그대로입니다. 규칙이 영어 글 기준(-ly 부사, em dash, Wh- 시작 문장)이라 한국어 글에는 일부만 들어맞습니다.
+
+### ponytail-review
+
+[DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) (MIT, Dietrich Gebert), 커밋 [`ebd8654`](https://github.com/DietrichGebert/ponytail/tree/ebd8654c2c627f721eb8f9c0d1bd4090a29f9e10/skills/ponytail-review) (2026-11-22). 이 스킬만 가져왔고 ponytail 본체(`karpathy-guidelines`와 겹침), `ponytail-audit`(`tech-debt-audit`과 겹침), 나머지 스킬과 hook은 가져오지 않았습니다.
+
+바꾼 점:
+
+- ponytail 본체의 `shortcut:` 주석 규칙을 언급하던 줄을 "한계를 적어 둔 지름길 주석"이라는 일반적인 표현으로 바꿨습니다. 본체 없이도 뜻이 통하게 하기 위해서입니다.
+- 출력 언어를 "아주 쉬운 영어"에서 "사용자가 쓰는 언어로, 아주 쉽게"로 바꿨습니다.
+- 그 외 내용은 원본 그대로입니다.
 
 ### attention-span
 

@@ -1,6 +1,6 @@
 # 인계 메모
 
-claude.ai 대화에서 만든 이 저장소를 Claude Code에서 이어서 작업하기 위한 메모입니다. 작업을 시작할 때 "다음 할 일"부터 확인하고, 끝날 때 이 파일을 갱신하세요. 마지막 갱신: 2026-11-25.
+claude.ai 대화에서 만든 이 저장소를 Claude Code에서 이어서 작업하기 위한 메모입니다. 작업을 시작할 때 "다음 할 일"부터 확인하고, 끝날 때 이 파일을 갱신하세요. 마지막 갱신: 2026-11-26.
 
 ## 왜 만들었나
 
@@ -59,3 +59,4 @@ AI가 만든 코드와 답변의 AI-Slop을 줄이고 싶어서 스킬을 모으
 | obra/superpowers `verification-before-completion` | 넣음 (수정) |
 | 115dkk/agent-skills 4개 | 넣음 (접두사만 변경) |
 | hardikpandya/stop-slop | 넣음 (README·CHANGELOG 제외, 내용 그대로) |
+| DietrichGebert/ponytail | `ponytail-review`만 넣음 (본체는 karpathy-guidelines와, audit은 tech-debt-audit과 겹침) |
